@@ -1,156 +1,78 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
-        <title>Base de Datos con JavaScript</title>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <script type="text/javascript">
-            var bd;
-            function iniciar() {
-
-                MostrarDatos = document.getElementById("MostrarDatos");
-                boton = document.getElementById("grabar");
-                boton.addEventListener("click", agregarobjeto, false);
-
-                boton = document.getElementById("buscar");
-                boton.addEventListener("click", buscarobjeto, false);
-                var solicitud = indexedDB.open("sistemas");
-
-                solicitud.onsuccess = function (e) {
-                    bd = e.target.result;
-                }
-
-                solicitud.onupgradeneeded = function (e) {
-                    bd = e.target.result;
-                    var ob = bd.createObjectStore("gente", {keyPath: ["nombre"]});
-                    ob.createIndex("numero", "numero", {unique: false});
-                }
-            }
-
-            function agregarobjeto() {
-                var active = dataBase.result;
-                var data = active.transaction(["people"], "readwrite");
-                var object = data.objectStore("people");
-                var nombre = document.getElementById("nombre").value;
-                var apellido = document.getElementById("apellido").value;
-                var identificacion = document.getElementById("identificacion").value;
-                var numero = document.getElementById("numero").value;
-                var facultad = document.getElementById("facultad").value;
-                var programa = document.getElementById("programa").value;
-                var semestre = document.getElementById("semestre").value;
-                var asignatura = document.getElementById("asignatura").value;
-                var transaccion = bd.transaction(["gente"], "readwrite");
-               
-                var request = object.put({({nombre: nombre, apellido: apellido, identificacion: identificacion, numero: numero, facultad: facultad,
-                    programa: programa, semestre: semestre, asignatura: asignatura});
-
-                agregar.addEventListener("success", mostrar, false);
-                document.getElementById("nombre").value = "";
-                document.getElementById("apellido").value = "";
-                document.getElementById("identificacion").value = "";
-                document.getElementById("numero").value = "";
-                document.getElementById("facultad").value = "";
-                document.getElementById("programa").value = "";
-                document.getElementById("semestre").value = "";
-                document.getElementById("asignatura").value = "";
-            }
-
-            function mostrar() {
-                MostrarDatos.innerHTML = "";
-                var transaccion = bd.transaction(["gente"], "readonly");
-                var almacen = transaccion.objectStore("gente");
-                var cursor = almacen.openCursor();
-                cursor.addEventListener("success", mostrarDatos, false);
-            }
-
-            function buscarobjeto() {
-                MostrarDatos.innerHTML = "";
-                var numero = document.getElementById("numero").value;
-                var transaction = bd.transaction(["gente"], "readonly");
-                var objectStore = transaction.objectStore("gente");
-                var index = objectStore.index("numero");
-                var ob = index.openCursor(numero);
-                ob.addEventListener("success", mostrarDatos, false);
-
-            }
-
-            window.addEventListener("load", iniciar, false);
-            var elements = [];
-
-            function mostrarDatos(e) {
-                var cursor = e.target.result;
-                if (cursor) {
-                    MostrarDatos.innerHTML += "<div><table border=1></caption><thead>"
-                            + "<tr> <td width=85>" + cursor.value.nombre
-                            + "</td><td width=85>" + cursor.value.apellido
-                            + "</td><td width=85>" + cursor.value.identificacion
-                            + "</td><td width=85>" + cursor.value.numero
-                            + "</td><td width=85>" + cursor.value.facultad
-                            + "</td><td width=85>" + cursor.value.programa
-                            + "</td><td width=85>" + cursor.value.semestre
-                            + "</td><td width=85>" + cursor.value.asignatura
-                            + "</td></tr></thead></table></div>";
-                    cursor.continue();
-                }
-            }
+            /* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+window.addEventListener("load", iniciar, false);
+window.addEventListener("load", iniciar, false);
+function iniciar() {
+    nombre1 = document.getElementById("nombre");
+    nombre2 = document.getElementById("apellido");
+    nombre1.addEventListener("input", validacion, false);
+    nombre2.addEventListener("input", validacion, false);
+    validacion();
+}
+function validacion() {
+    if (nombre1.value === '' && nombre2.value === '') {
+        nombre1.setCustomValidity('inserte al menos un nombre');
+        nombre1.style.background = '#FFDDDD';
+    } else {
+        nombre1.setCustomValidity('');
+        nombre1.style.background = '#FFFFFF';
+    }
+}
 
 
+function iniciar() {
+    edad = document.getElementById("miedad");
+    edad.addEventListener("change", cambiarrango, false);
+    document.informacion.addEventListener("invalid", validacion, true);
+    document.getElementById("enviar").addEventListener("click", enviar, false);
+    document.informacion.addEventListener("input", controlar, false);
+}
+function cambiarrango() {
+    var salida = document.getElementById("rango");
+    var calc = edad.value - 20;
+    if (calc < 20) {
+        calc = 0;
+        edad.value = 20;
+    }
+    salida.innerHTML = calc + ' a ' + edad.value;
+}
+function validacion(e) {
+    var elemento = e.target;
+    elemento.style.background = '#FFDDDD';
+}
+function enviar() {
+    var valido = document.informacion.checkValidity();
+    if (valido) {
+        document.informacion.submit();
+    }
+}
+function controlar(e) {
+    var elemento = e.target;
+    if (elemento.validity.valid) {
+        elemento.style.background = '#FFFFFF';
+    } else {
+        elemento.style.background = '#FFDDDD';
+    }
+}
+    
         </script>
+
     </head>
-    <body>    	
-        <form name="formulario">
-            <div id="contenedor">
-                <section id="cajaformulario">    
-                    <table border=1>
-                        <caption><B>Registro de Estudiantes</B></caption>
-                        <thead>
-                            <tr>
-                                <th><input type="text" id="nombre" placeholder="Introducir nombre" /></th>
-                                <th><input type="text" id="apellido" placeholder="Introducir apellido" /></th>
-                                <th><input type="text" id="identificacion" placeholder="Introducir tipo identificacion" /> </th>
-                                <th><input type="text" id="numero" placeholder="Introducir # de identificación" /></th>
-                            </tr>
-                            <tr>
+    <body>
 
-                                <th><input type="text" id="facultad" placeholder="Introducir facultad" /></th>
-                                <th><input type="text" id="programa" placeholder="Introducir programa" /></th>
-                                <th><input type="text" id="semestre" placeholder="Introducir semestre" /></th>
-                                <th><input type="text" id="asignatura" placeholder="Introducir asignatura" /></th>						
-                            </tr>
-                            <tr>
-                                <th colspan=7><button type="button" name="grabar" id="grabar" value="Grabar">Guardar</button></th>
-                            </tr>
-                            <tr>
-                                <th colspan=7><button type="button" name="buscar" id="buscar" value="Buscar">Buscar</button></th>
-                            </tr>
-                        </thead>
-                    </table>  
-                </section>
-            </div>
+        <button onclick="read()">Read </button>
+        <button onclick="readAll()">Read all </button>
+        <button onclick="add()">Add data </button>
+        <button onclick="remove()">Delete data </button>
 
-            <div id="elements">
-                <section id="MostrarDatos">
-                    <table border=1>
-                        <caption><B>Estudiante(s) Registrado(s)</B></caption>
-                        <thead>
-                            <tr>
-                                <td width=85><B><Center>Nombre</B></td>
-                                <td width=85><B><Center>Apellido</B></td>
-                                <td width=135><B><Center>T de Identificación</B></td>
-                                <td width=135><B><Center>N de dentificacion</B></td>
-                                <td width=85><B><Center>Facultad</B></td>
-                                <td width=85><B><Center>Programa</B></td>
-                                <td width=85><B><Center>Semestre</B></td>
-                                <td width=85><B><Center>Asignatura</B></td>
-                            </tr>
-                        </thead>
-                        <tbody id="cursor">
-                            <tr>
-                                <td colspan="9">No hay elementos a mostrar</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </section>
-            </div>    
-        </form>
     </body>
 </html>

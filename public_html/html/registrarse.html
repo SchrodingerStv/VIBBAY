@@ -10,9 +10,7 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
-        <script src="../js/bd.js"></script>
-
+        <script src="../js/registro.js"></script>
 
 
         <link rel="stylesheet" href="../css/estilos.css" type="text/css" media="all" />
@@ -39,7 +37,7 @@ and open the template in the editor.
                             </a>
                         </li>
 
-                        <li class="login" id="expr">
+                        <li class="login">
                             <a href="login.html">
                                 Identificarse/Registrarse
                             </a>
@@ -51,16 +49,24 @@ and open the template in the editor.
 
         <div class="main-container">
             <div class="main wrapper clearfix">
-                <div class="loguear">
-                    <h1>Identificarse</h1>
-                    <form id="logearse" method="post">
-                        <br><input type="email" name="email" id ="email" placeholder="Email"><br>
-                        <br><input type="password" name="pass" id="pasw" placeholder="Password"><br>
-                        <br><input type="button" name="logueo" id="login" class="login-submit" value="Identificate"><br>
-                        <br><input type="button" name="registro" id="registrar" class="login-submit" value="Registrarse"><br>
+
+
+                <div class="registro">
+                    <h1>Registrarse</h1>
+
+                    <form id = "registrarse" >
+                        <br><input type="text" name="user" id="nombre" placeholder="Nombre de usuario"><br>
+                        <br><input type="email" name="email" id="em" placeholder="Email"><br>
+                        <br> <input type="password" name="psw" maxlength=16 id="passw" placeholder="Password"><br>
+                        <br> <input type="number" name="movil" maxlength=9 id="telf" placeholder="Numero movil"><br> 
+                        <br><input type="submit" name="registro" id="registra" class="login-submit" value="Registrarse"><br>
+                        <br><input type="button" name="logen" id="identif" class="login-submit" value="Identificarse"> <br>
                     </form>
 
                 </div>
+
+
+
 
 
             </div> <!-- #main -->
@@ -75,7 +81,7 @@ and open the template in the editor.
 
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
- 
+
     </body>
 </html>
 

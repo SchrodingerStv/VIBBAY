@@ -199,9 +199,8 @@ nav a:hover {
 .loguear{
 
     border: 1px dotted #999;
-    border-radius: 0;
-    float: left;
-    width: 40%;
+     margin: auto;
+    width: 80%;
     -webkit-box-shadow: 0 5px 10px #aaa;
     -moz-box-shadow: 0 5px 10px #aaa;
     box-shadow: 0 5px 10px #aaa;
@@ -209,9 +208,9 @@ nav a:hover {
     padding: 20px 30px 40px;
 }
 .registro{
-
-    float: right;
-    width: 40%;
+    margin: auto;
+     width: 80%;
+    border: 1px dotted #999;
     -webkit-box-shadow: 0 5px 10px #aaa;
     -moz-box-shadow: 0 5px 10px #aaa;
     box-shadow: 0 5px 10px #aaa;
@@ -219,9 +218,12 @@ nav a:hover {
     padding: 20px 30px 40px;
 }
 
+
+
 input{
 
     width: 50%;
+    
     -webkit-box-shadow: 0 5px 10px #aaa;
     -moz-box-shadow: 0 5px 10px #aaa;
     box-shadow: 0 5px 10px #aaa;
